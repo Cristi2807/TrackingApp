@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "792812168466",
+    "firebase_url": "https://tracking-app-5aafd-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "tracking-app-5aafd",
+    "storage_bucket": "tracking-app-5aafd.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:792812168466:android:bf581d93cc5411ca8e7fcb",
+        "android_client_info": {
+          "package_name": "com.example.tracking_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "792812168466-iu49s9rvhoma8ukrcosia2ocnjbuagdh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOl6xuwuvPflx8KMaZ8VuJg6g-5gO-Xh0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "792812168466-iu49s9rvhoma8ukrcosia2ocnjbuagdh.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "792812168466-eif73kkpfi1ul6pbtm7viks3ttkvc9k4.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.trackingApp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
