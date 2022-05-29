@@ -16,13 +16,14 @@ class Statistics extends StatelessWidget {
                   style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.w800
-                  )
+                  ),
               ),
               SizedBox(width: 8),
               Icon(
                   Icons.pie_chart_rounded,
                   size: 15,
-                  color: Color(0xff3bc6fa))
+                  color: Color(0xff3bc6fa)
+              ),
             ]
           ),
         ),
@@ -38,7 +39,7 @@ class Statistics extends StatelessWidget {
                   iconBackground: Color(0xffe4e7ff),
                   time: '+5s',
                   label: 'Time',
-                  value: '30:34'
+                  value: '30:34',
               ),
               SizedBox(width: 15),
               InfoStat(
@@ -47,7 +48,7 @@ class Statistics extends StatelessWidget {
                   iconBackground: Color(0xffffe4fb),
                   time: '+5s',
                   label: 'Heart Rate',
-                  value: '151bpm'
+                  value: '151bpm',
               ),
               SizedBox(width: 15),
               InfoStat(
@@ -58,7 +59,7 @@ class Statistics extends StatelessWidget {
                   label: 'Energy',
                   value: '169kcal'
               ),
-              SizedBox(width: 30)
+              SizedBox(width: 30),
             ],
           )
         )
@@ -82,7 +83,7 @@ class InfoStat extends StatelessWidget {
     required this.iconBackground,
     required this.time,
     required this.label,
-    required this.value
+    required this.value,
   }) : super(key: key);
 
   @override
@@ -109,7 +110,7 @@ class InfoStat extends StatelessWidget {
           StatIcon(
               icon: icon,
               iconColor: iconColor,
-              iconBackground: iconBackground
+              iconBackground: iconBackground,
           ),
           Change(time: time),
           Align(
@@ -148,7 +149,7 @@ class Change extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.symmetric(
             vertical: 1,
-            horizontal: 4
+            horizontal: 4,
         ),
         decoration: BoxDecoration(
           color: Colors.green,
@@ -187,9 +188,8 @@ class StatIcon extends StatelessWidget {
         child: Icon(
             icon,
             size: 15,
-            color: iconColor
+            color: iconColor,
         )
     );
   }
 }
-

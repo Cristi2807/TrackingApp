@@ -46,17 +46,20 @@ class DateBox extends StatelessWidget {
         gradient: active
             ? LinearGradient(
             colors: const [
-              Color(0xff92e2ff),
-              Color(0xff1ebdf8),
+              Colors.indigoAccent,
+              Colors.indigo,
             ],
-          begin: Alignment.topCenter
+          begin: Alignment.topCenter,
         ): null,
         borderRadius: BorderRadius.circular(10),
         border: Border.all(
-            color: Color(0xffe1e1e1))
+            color: Color(0xffe1e1e1),
+        ),
       ),
       child: DefaultTextStyle.merge(
-        style: active ? TextStyle(color: Colors.white) : null,
+        style: active ? TextStyle(
+            color: Colors.white,
+        ) : null,
         child: Column(
           children: [
             Text(
@@ -64,7 +67,7 @@ class DateBox extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.bold,
-                )
+                ),
             ),
             SizedBox(height: 8),
             Text(

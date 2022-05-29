@@ -12,23 +12,19 @@ class Header extends StatelessWidget {
         children: [
           CustomPaint(
             painter: HeaderPainter(),
-            size: Size(double.infinity, 200),
+            size: Size(
+                double.infinity,
+                200,
+            ),
           ),
           Positioned(
             top: 20,
             left: 15,
             child: IconButton(onPressed: () {},
                 icon: Icon(Icons.menu,
-                  color: Colors.white,))
+                  color: Colors.white,)
+            ),
           ),
-          /*Positioned(
-              top: 30,
-              left: 60,
-              child: Text(
-                'Dashboard',
-                style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
-              )
-          ),*/
           Positioned(
               top: 30,
               right: 30,
@@ -47,14 +43,17 @@ class Header extends StatelessWidget {
                 Text('Hello,',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 25)),
+                        fontSize: 25
+                    ),
+                ),
                 Text('Eugeniu',
                     style: TextStyle(
                         color: Colors.white,
-                        fontSize: 25)),
+                        fontSize: 25),
+                ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );
@@ -68,8 +67,9 @@ class HeaderPainter extends CustomPainter {
     Paint circles = Paint()..color = Colors.white.withAlpha(10);
     canvas.drawRect(
         Rect.fromPoints(
-            Offset(0,0),
-            Offset(size.width, size.height)),
+            Offset(0, 0),
+            Offset(size.width, size.height)
+        ),
         backColor,
     );
     canvas.drawCircle(Offset(size.width * .6, 10), 55, circles);

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 enum ActivityType {
   first,
-  second
+  second,
 }
 
 class TypeOfActivity {
@@ -13,7 +13,7 @@ class TypeOfActivity {
   TypeOfActivity({
     required this.image,
     required this.name,
-    required this.type
+    required this.type,
   });
 }
 

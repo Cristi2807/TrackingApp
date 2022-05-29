@@ -20,20 +20,21 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
           size: 16,
         ),
       ),
-      title: Text('Activity',
-          style: TextStyle(
-            color: Color(0xff262e5b),
-            fontWeight: FontWeight.bold,
-            fontSize: 15,
-          )
+      title: Text(
+        'Activity',
+        style: TextStyle(
+          color: Color(0xff262e5b),
+          fontWeight: FontWeight.bold,
+          fontSize: 15,
+        ),
       ),
       centerTitle: true,
       actions: [
         TextButton(
-            onPressed: (){},
+            onPressed: () {},
             child: Icon(
                 Icons.notifications,
-                size: 16
+                size: 16,
             ),
             style: ElevatedButton.styleFrom(
               padding: const EdgeInsets.all(5),
@@ -42,8 +43,8 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
               shape: CircleBorder(),
               primary: Color(0xffb5e8f7),
               onPrimary: Color(0xff262e5b),
-            )
-        )
+            ),
+        ),
       ],
     );
   }

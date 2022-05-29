@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tracking_app/pages/login.dart';
+import '../models/user.dart';
 
-import '../models/user_model.dart';
 
 class AuthService {
 
@@ -39,8 +40,6 @@ class AuthService {
         );
       }
     }
-    
-
   }
 
   Future<User?> createUserWithEmailAndPassword(
@@ -58,5 +57,4 @@ class AuthService {
   Future<void> signOut() async{
     return await _firebaseAuth.signOut();
   }
-
 }

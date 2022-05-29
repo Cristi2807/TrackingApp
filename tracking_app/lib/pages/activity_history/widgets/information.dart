@@ -34,7 +34,7 @@ class Statistics extends StatelessWidget {
     Key? key,
     required this.value,
     required this.unit,
-    required this.label
+    required this.label,
   }) : super(key: key);
 
   @override
@@ -48,7 +48,7 @@ class Statistics extends StatelessWidget {
             text: value,
             style: TextStyle(
                 fontSize: 20,
-                fontWeight: FontWeight.w900
+                fontWeight: FontWeight.w900,
             ),
             children: [
               TextSpan(
@@ -61,14 +61,17 @@ class Statistics extends StatelessWidget {
                   fontWeight: FontWeight.w500,
                 )
               )
-            ]),
+            ]
+          ),
         ),
-        SizedBox(height: 6),
+        SizedBox(
+            height: 6
+        ),
         Text(
           value,
           style: TextStyle(
               fontSize: 10,
-              fontWeight: FontWeight.w500
+              fontWeight: FontWeight.w500,
           ),
         ),
       ],

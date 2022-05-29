@@ -12,7 +12,7 @@ class Graph extends StatelessWidget {
         child: SizedBox(
           width: double.infinity,
           child: GraphArea(),
-        )
+        ),
     );
   }
 }
@@ -44,7 +44,12 @@ class _GraphAreaState extends State<GraphArea> with SingleTickerProviderStateMix
   void initState() {
     super.initState();
     _animationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 2500));
+        AnimationController(
+            vsync: this,
+            duration: Duration(
+                milliseconds: 2500
+            ),
+        );
     _animationController.forward();
   }
 
@@ -58,10 +63,15 @@ class _GraphAreaState extends State<GraphArea> with SingleTickerProviderStateMix
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _animationController.forward(from: 0.0);
+        _animationController.forward(
+            from: 0.0
+        );
         },
       child: CustomPaint(
-        painter: GraphPainter(_animationController.view, data: data),
+        painter: GraphPainter(
+            _animationController.view,
+            data: data,
+        ),
       ),
     );
   }
@@ -73,14 +83,26 @@ class GraphPainter extends CustomPainter {
   final Animation<double> _dotSize;
 
   GraphPainter(Animation<double> animation, {required this.data})
-      : _size = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
+      : _size = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(
         parent: animation,
-        curve: Interval(0.0, 0.75, curve: Curves.easeInOutCubicEmphasized),
-        )),
-        _dotSize = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
-          parent: animation,
-          curve: Interval(0.75, 1, curve: Curves.easeInOutCubicEmphasized),
-        )),
+        curve: Interval(
+            0.0,
+            0.75,
+            curve: Curves.easeInOutCubicEmphasized
+        ),
+      )
+  ),
+        _dotSize = Tween<double>(begin: 0, end: 1).animate(
+            CurvedAnimation(
+              parent: animation,
+              curve: Interval(
+                  0.75,
+                  1,
+                  curve: Curves.easeInOutCubicEmphasized,
+              ),
+            ),
+        ),
         super(repaint: animation);
 
   @override
@@ -88,11 +110,12 @@ class GraphPainter extends CustomPainter {
 
     var xSpacing = size.width / (data.length - 1);
 
-    var maxSteps = data.fold<DataPoint>(data[0], (p, c) => p.steps > c.steps ? p : c)
-        .steps;
+    var maxSteps = data.fold<DataPoint>(
+        data[0], (p, c) => p.steps > c.steps ? p : c
+    ).steps;
 
-    print(xSpacing);
-    print(maxSteps);
+    // print(xSpacing);
+    // print(maxSteps);
 
     var yRatio = size.height / maxSteps;
     var curveOffset = xSpacing * 0.3;
@@ -109,7 +132,7 @@ class GraphPainter extends CustomPainter {
     }
 
     Paint linePaint = Paint()
-      ..color = Color(0xff30c3f9)
+      ..color = Colors.indigoAccent
       ..style = PaintingStyle.stroke
       ..strokeWidth = 3.0;
 
@@ -124,7 +147,7 @@ class GraphPainter extends CustomPainter {
           Offset(size.width / 2, 0),
           Offset(size.width / 2, size.height),
           [
-            Color(0xff30c3f9),
+            Colors.indigoAccent,
             Colors.white,
           ],
       )
@@ -136,7 +159,7 @@ class GraphPainter extends CustomPainter {
       ..strokeWidth = 8;
 
     Paint dotCenter = Paint()
-      ..color = Color(0xff30c3f9)
+      ..color = Colors.indigoAccent
       ..strokeWidth = 8;
 
     Path linePath = Path();

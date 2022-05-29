@@ -9,22 +9,26 @@ class RecentActivities extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
         child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Recent activities',
-                    style: Theme.of(context).textTheme.headline1,
-                  ),
-                  Expanded(
-                      child: ListView.builder(
-                        itemCount: 10,
-                        itemBuilder:(context, index) => ActivityItem(),
-                      )
-                  )
-                ]
+            padding: const EdgeInsets.symmetric(
+                vertical: 20,
+                horizontal: 20,
             ),
-        )
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Recent activities',
+                  style: Theme.of(context).textTheme.headline1,
+                ),
+                Expanded(
+                    child: ListView.builder(
+                      itemCount: 10,
+                      itemBuilder:(context, index) => ActivityItem(),
+                    ),
+                ),
+              ]
+          ),
+        ),
     );
   }
 }
@@ -41,7 +45,7 @@ class ActivityItem extends StatelessWidget {
     'Cycling',
     'Swimming',
     'Basketball',
-    'Stair Climbing'
+    'Stair Climbing',
   ];
 
   @override
@@ -53,13 +57,15 @@ class ActivityItem extends StatelessWidget {
         Navigator.of(context).pushNamed('/activity_history');
       },
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 5),
+        margin: const EdgeInsets.symmetric(
+            vertical: 5,
+        ),
         height: 50,
         decoration: BoxDecoration(
             border: Border.all(
               color: Color(0xffe1e1e1),
             ),
-            borderRadius: BorderRadius.circular(10)
+            borderRadius: BorderRadius.circular(10),
         ),
         child: Row(
           children: [
@@ -78,31 +84,58 @@ class ActivityItem extends StatelessWidget {
                       image: DecorationImage(
                           image: AssetImage('assets/basketball.jpg'),
                           fit: BoxFit.fill,
-                          )),
+                          ),
+                  ),
                   ),
                 ),
             SizedBox(width: 20),
             Text(
                 activity,
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w900)
+                style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w900,
+                ),
             ),
-            Expanded(child: SizedBox()),
-            SizedBox(width: 5),
-            Icon(Icons.timer, size: 12),
-            SizedBox(width: 5),
+            Expanded(
+                child: SizedBox(),
+            ),
+            SizedBox(
+                width: 5,
+            ),
+            Icon(
+                Icons.timer,
+                size: 12,
+            ),
+            SizedBox(
+                width: 5,
+            ),
             Text(
                 '30 min',
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)
+                style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                ),
             ),
-            SizedBox(width: 5),
-            Icon(Icons.wb_sunny_outlined, size: 12),
-            SizedBox(width: 5),
+            SizedBox(
+                width: 5
+            ),
+            Icon(
+                Icons.wb_sunny_outlined,
+                size: 12,
+            ),
+            SizedBox(
+                width: 5,
+            ),
             Text(
                 '30 kka',
-                style: TextStyle(fontSize: 10, fontWeight: FontWeight.w600)
+                style: TextStyle(
+                    fontSize: 10,
+                    fontWeight: FontWeight.w600,
+                ),
             ),
             SizedBox(width: 20)
-          ],),
+          ],
+        ),
       ),
     );
   }

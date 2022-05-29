@@ -10,9 +10,6 @@ final Map<int, String> daysOfWeek = {
   7: 'Sun'
 };
 
-// min 5
-// max 10
-
 int randBetween(int min, int max) {
   return Random().nextInt(max - min) + min;
 }
