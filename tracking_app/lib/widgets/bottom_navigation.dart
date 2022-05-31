@@ -1,4 +1,8 @@
+//import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
+import 'package:tracking_app/pages/logout.dart';
+import 'package:tracking_app/query.dart';
 
 class BottomNavigation extends StatelessWidget {
   const BottomNavigation({Key? key}) : super(key: key);
@@ -18,7 +22,7 @@ class BottomNavigation extends StatelessWidget {
             children: [
               GestureDetector(
                   onTap: () {
-                    // Navigator.of(context).pushNamed('/home');
+                     Navigator.pushNamed(context,'/home');
                   },
                   child: Icon(
                       Icons.home,
@@ -27,23 +31,42 @@ class BottomNavigation extends StatelessWidget {
               ),
               GestureDetector(
                   onTap: () {
-                    // Navigator.of(context).pushNamed('/activity_history');
+                     Navigator.pushNamed(context,'/activity_history');
                     },
                   child: Icon(
                       Icons.event,
                       size: 30
                   )
               ),
-              Icon(
+              GestureDetector(
+                  onTap: ()  async {
+                    //final myUserId = FirebaseAuth.instance.currentUser?.uid;
+                    DatabaseReference postListRef = FirebaseDatabase.instance.ref("activities");
+                    DatabaseReference newPostRef = postListRef.push();
+                    newPostRef.set({
+                      "activity":"Walking",
+                      "timestamp":-DateTime.now().millisecondsSinceEpoch.toInt(),
+                    }).asStream();
+
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => RealTimeQuery()));
+                    },
+                  child: Icon(
                   Icons.add_circle,
                   size: 40
+                  )
               ),
               Icon(
                   Icons.settings,
                   size: 30
               ),
-              Icon(Icons.person,
+              GestureDetector(
+                  onTap: () {
+                    Navigator.push(context,MaterialPageRoute(builder: (context) => LogoutPage()));
+                    },
+                  child:Icon(
+                      Icons.person,
                   size: 30
+              ),
               ),
           ]),
         ),

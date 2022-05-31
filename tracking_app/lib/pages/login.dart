@@ -12,6 +12,8 @@ import 'package:tracking_app/models/user.dart';
 import 'package:tracking_app/pages/home/home.dart';
 import 'package:tracking_app/pages/welcome.dart';
 
+import '../wrapper.dart';
+
 class LoginPage extends StatelessWidget {
   const LoginPage({Key? key}) : super(key: key);
 

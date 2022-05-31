@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -8,18 +7,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:tracking_app/services/auth_service.dart';
 import 'package:tracking_app/wrapper.dart';
 import 'package:tracking_app/pages/signup.dart';
-import 'package:tracking_app/pages/login.dart';
 import 'package:tracking_app/pages/welcome.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  bool userLoggedIn;
-  if(FirebaseAuth.instance.currentUser?.uid == null) {
-    userLoggedIn = false;
-  } else {
-    userLoggedIn = true;
-  }
 
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);

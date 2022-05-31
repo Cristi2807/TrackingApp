@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
+
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tracking_app/pages/login.dart';
 import '../models/user.dart';
+import '../pages/home/home.dart';
 
 
 class AuthService {
@@ -40,6 +43,7 @@ class AuthService {
         );
       }
     }
+    return null;
   }
 
   Future<User?> createUserWithEmailAndPassword(
