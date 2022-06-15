@@ -48,7 +48,7 @@ class BottomNavigation extends StatelessWidget {
                       "timestamp":-DateTime.now().millisecondsSinceEpoch.toInt(),
                     }).asStream();
 
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => RealTimeQuery()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => AddUser()));
                     },
                   child: Icon(
                   Icons.add_circle,

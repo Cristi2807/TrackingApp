@@ -9,9 +9,13 @@ import 'package:tracking_app/wrapper.dart';
 import 'package:tracking_app/pages/signup.dart';
 import 'package:tracking_app/pages/welcome.dart';
 
+import 'firebase_options.dart';
+
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp( options: DefaultFirebaseOptions.currentPlatform,
+  )
+  ;
 
 
   SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);

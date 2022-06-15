@@ -1,37 +1,44 @@
-import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class RealTimeQuery extends StatefulWidget {
-  const RealTimeQuery({Key? key}) : super(key: key);
-  @override
-  State<RealTimeQuery> createState() => _RealTimeQueryState();
-}
+// Import the firebase_core and cloud_firestore plugin
+import 'package:firebase_core/firebase_core.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
+class AddUser extends StatelessWidget {
+  //final String fullName;
+  //final String company;
+  //final int age;
 
+  //AddUser(this.fullName, this.company, this.age);
 
-class _RealTimeQueryState extends State<RealTimeQuery> {
-
-  Query query= FirebaseDatabase.instance.ref("activities").orderByChild('timestamp');
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child:FirebaseAnimatedList(
-          query: query,
-          itemBuilder: (BuildContext context, snapshot,
-            Animation<double> animation, int index){
-            return Card(
-              child:Column(
-                children:[
-                  Row(children: [Text(snapshot.value.toString())])
-                ],
-              ),
-            );
-          }
-        )
+    // Create a CollectionReference called users that references the firestore collection
+
+
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final User? user = auth.currentUser;
+    final uid = user?.uid;
+
+    final db= FirebaseFirestore.instance;
+    //CollectionReference users = FirebaseFirestore.instance.collection('users');
+    
+    Future<void> addUser() {
+      // Call the user's CollectionReference to add a new user
+      return db.collection('users').doc(uid.toString())
+          .set({
+        'full_name': "fullName", // John Doe
+        'company': "company", // Stokes and Sons
+        'age': true, // 42
+      });
+    }
+
+    return TextButton(
+      onPressed: addUser,
+      child: Text(
+        "Add User",
       ),
     );
   }
 }
-

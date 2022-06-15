@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../services/auth_service.dart';
@@ -32,7 +34,10 @@ class SignupPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 40),
-          height: MediaQuery.of(context).size.height - 50,
+          height: MediaQuery
+              .of(context)
+              .size
+              .height - 50,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -40,18 +45,18 @@ class SignupPage extends StatelessWidget {
               Column(
                 children: <Widget>[
                   Text("Sign up",
-                  style: TextStyle(
-                    fontSize: 30,
-                    fontWeight: FontWeight.bold,
-                  ),
+                    style: TextStyle(
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   SizedBox(
                     height: 20,
                   ),
                   Text("Create an account",
                     style: TextStyle(
-                        fontSize: 15,
-                        color:Colors.grey[700],
+                      fontSize: 15,
+                      color: Colors.grey[700],
                     ),
                   ),
                 ],
@@ -82,13 +87,13 @@ class SignupPage extends StatelessWidget {
                 padding: EdgeInsets.only(top: 3, left: 3),
                 decoration:
                 BoxDecoration(
-                    borderRadius: BorderRadius.circular(50),
-                    border: Border(
-                      bottom: BorderSide(color: Colors.black),
-                      top: BorderSide(color: Colors.black),
-                      left: BorderSide(color: Colors.black),
-                      right: BorderSide(color: Colors.black),
-                    ),
+                  borderRadius: BorderRadius.circular(50),
+                  border: Border(
+                    bottom: BorderSide(color: Colors.black),
+                    top: BorderSide(color: Colors.black),
+                    left: BorderSide(color: Colors.black),
+                    right: BorderSide(color: Colors.black),
+                  ),
                 ),
                 child: MaterialButton(
                   minWidth: double.infinity,
@@ -98,6 +103,23 @@ class SignupPage extends StatelessWidget {
                       emailController.text,
                       passwordController.text,
                     );
+
+                    final FirebaseAuth auth = FirebaseAuth.instance;
+                    final User? user = auth.currentUser;
+                    final uid = user?.uid;
+                    final db = FirebaseFirestore.instance;
+
+                    db.collection('users').doc(uid.toString())
+                        .set({
+                    'first_name': "Johny",
+                    'last_name': "Depp",
+                    'age': 50,
+                    'isDeleted':false,
+                    'isBlocked':false,
+                    'email': emailController.text,
+                    'role': "user",
+                    });
+
                     Navigator.pop(context);
                   },
                   color: Color(0xff262e5b),
@@ -121,12 +143,13 @@ class SignupPage extends StatelessWidget {
                   TextButton(
                     onPressed: () {
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => LoginPage()));
-                      },
-                    child: Text(" Login", style:TextStyle(
-                        color: Color(0xff262e5b),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()));
+                    },
+                    child: Text(" Login", style: TextStyle(
+                      color: Color(0xff262e5b),
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
                     ),
                     ),
                   ),
