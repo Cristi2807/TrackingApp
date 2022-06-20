@@ -5,6 +5,7 @@ import 'package:tracking_app/pages/activity_history/activity_history.dart';
 import 'package:tracking_app/pages/home/home.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:tracking_app/services/auth_service.dart';
+import 'package:tracking_app/services/test.dart';
 import 'package:tracking_app/wrapper.dart';
 import 'package:tracking_app/pages/signup.dart';
 import 'package:tracking_app/pages/welcome.dart';

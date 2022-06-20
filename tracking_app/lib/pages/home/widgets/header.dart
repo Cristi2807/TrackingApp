@@ -8,9 +8,7 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FirebaseAuth auth = FirebaseAuth.instance;
-
-
-
+    final db = FirebaseFirestore.instance;
 
     return SizedBox(
       width: double.infinity,
@@ -48,15 +46,37 @@ class Header extends StatelessWidget {
             left: 35,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              children: const [
+              children: [
                 Text(
                   'Hello,',
                   style: TextStyle(color: Colors.white, fontSize: 25),
                 ),
-                Text(
-                  'Johny',
-                  style: TextStyle(color: Colors.white, fontSize: 25),
-                ),
+                FutureBuilder<DocumentSnapshot>(
+                    future: db
+                        .collection('users')
+                        .doc(auth.currentUser?.uid.toString())
+                        .get(),
+                    builder: (BuildContext context,
+                        AsyncSnapshot<DocumentSnapshot> snapshot) {
+                      // if (snapshot.hasError) {
+                      //   return Text("Something went wrong");
+                      // }
+
+                      // if (snapshot.hasData && !snapshot.data!.exists) {
+                      //   return Text("Document does not exist");
+                      // }
+
+                      if (snapshot.connectionState == ConnectionState.done) {
+                        Map<String, dynamic> data =
+                            snapshot.data!.data() as Map<String, dynamic>;
+                        return Text(
+                          "${data['first_name']}",
+                          style: TextStyle(color: Colors.white, fontSize: 25),
+                        );
+                      }
+
+                      return Text("");
+                    }),
               ],
             ),
           ),

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tracking_app/pages/blocked.dart';
 import 'package:tracking_app/services/auth_service.dart';
 import 'package:provider/provider.dart';
 import 'models/user.dart';
@@ -27,28 +27,28 @@ class Wrapper extends StatelessWidget {
                 stream:
                     db.collection('users').doc(user.uid.toString()).snapshots(),
                 builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+                  if (snapshot.hasData && snapshot.data != null) {
+                    if (!snapshot.data!['isBlocked'] &&
+                        !snapshot.data!['isDeleted']) {
+
+                      return Home();
+                    }
+                  }
+
                   if (snapshot.hasData &&
                       snapshot.data != null &&
                       snapshot.data!['isBlocked']) {
-                    Fluttertoast.showToast(
-                      msg: 'This account has been blocked!',
-                    );
-                    authService.signOut();
-                    return WelcomePage();
+                    return Blocked();
                   }
+
                   if (snapshot.hasData &&
                       snapshot.data != null &&
-                      snapshot.data!['isDeleted']) {
-                    Fluttertoast.showToast(
-                      msg: 'This account has been deleted!',
-                    );
-                    authService.signOut();
-                    return WelcomePage();
+                      snapshot.data!['isDeleted'] == true) {
+
+
+                    return Blocked();
                   }
-                  if (snapshot.hasData && snapshot.data != null) {
-                    if (!snapshot.data!['isBlocked'] &&
-                        !snapshot.data!['isDeleted']) return Home();
-                  }
+
                   return CircularProgressIndicator();
                 },
               );
