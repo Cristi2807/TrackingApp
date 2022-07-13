@@ -12,6 +12,8 @@ class SignupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController emailController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+    final TextEditingController nameController = TextEditingController();
+    final TextEditingController familyController = TextEditingController();
     final authService = Provider.of<AuthService>(context);
 
     return Scaffold(
@@ -25,7 +27,8 @@ class SignupPage extends StatelessWidget {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(Icons.arrow_back_ios,
+          icon: Icon(
+            Icons.arrow_back_ios,
             size: 20,
             color: Color(0xff262e5b),
           ),
@@ -34,17 +37,15 @@ class SignupPage extends StatelessWidget {
       body: SingleChildScrollView(
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 40),
-          height: MediaQuery
-              .of(context)
-              .size
-              .height - 50,
+          height: MediaQuery.of(context).size.height - 50,
           width: double.infinity,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  Text("Sign up",
+                  Text(
+                    "Sign up",
                     style: TextStyle(
                       fontSize: 30,
                       fontWeight: FontWeight.bold,
@@ -53,7 +54,8 @@ class SignupPage extends StatelessWidget {
                   SizedBox(
                     height: 20,
                   ),
-                  Text("Create an account",
+                  Text(
+                    "Create an account",
                     style: TextStyle(
                       fontSize: 15,
                       color: Colors.grey[700],
@@ -66,10 +68,22 @@ class SignupPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: TextField(
+                      controller: nameController,
+                      decoration: InputDecoration(labelText: "First Name"),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
+                      controller: familyController,
+                      decoration: InputDecoration(labelText: "Last Name"),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextField(
                       controller: emailController,
-                      decoration: InputDecoration(
-                          labelText: "Email"
-                      ),
+                      decoration: InputDecoration(labelText: "Email"),
                     ),
                   ),
                   Padding(
@@ -85,8 +99,7 @@ class SignupPage extends StatelessWidget {
               ),
               Container(
                 padding: EdgeInsets.only(top: 3, left: 3),
-                decoration:
-                BoxDecoration(
+                decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(50),
                   border: Border(
                     bottom: BorderSide(color: Colors.black),
@@ -109,15 +122,15 @@ class SignupPage extends StatelessWidget {
                     final uid = user?.uid;
                     final db = FirebaseFirestore.instance;
 
-                    db.collection('users').doc(uid.toString())
-                        .set({
-                    'first_name': "Johny",
-                    'last_name': "Depp",
-                    'age': 50,
-                    'isDeleted':false,
-                    'isBlocked':false,
-                    'email': emailController.text,
-                    'role': "user",
+                    await db.collection('users').doc(uid.toString()).set({
+                      'first name': nameController.text,
+                      'last name': familyController.text,
+                      'gender': "Männlich",
+                      'birthday': "--.--.----",
+                      'status': "aktiv",
+                      'email': emailController.text,
+                      'role': "User",
+                      'uid': uid.toString(),
                     });
 
                     Navigator.pop(context);
@@ -128,11 +141,12 @@ class SignupPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(50),
                   ),
                   child: Text(
-                    "Sign up", style: TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 18,
-                    color: Colors.white,
-                  ),
+                    "Sign up",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ),
@@ -142,15 +156,16 @@ class SignupPage extends StatelessWidget {
                   Text("Already have an account?"),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(
-                          context,
+                      Navigator.push(context,
                           MaterialPageRoute(builder: (context) => LoginPage()));
                     },
-                    child: Text(" Login", style: TextStyle(
-                      color: Color(0xff262e5b),
-                      fontWeight: FontWeight.w600,
-                      fontSize: 18,
-                    ),
+                    child: Text(
+                      " Login",
+                      style: TextStyle(
+                        color: Color(0xff262e5b),
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ),
                     ),
                   ),
                 ],

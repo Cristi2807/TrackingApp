@@ -23,11 +23,11 @@ class RecentActivities extends StatelessWidget {
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: db
-                  .collection('activities')
+                  .collection('users')
                   .doc(auth.currentUser?.uid.toString())
-                  .collection('all')
+                  .collection('activities')
                   .limit(7)
-                  .orderBy("time_end",descending: true)
+                  .orderBy("time_end", descending: true)
                   .snapshots(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
@@ -39,7 +39,7 @@ class RecentActivities extends StatelessWidget {
                       itemBuilder: (context, index) {
                         DocumentSnapshot doc = snapshot.data!.docs[index];
                         return ActivityItem(
-                            doc['name'], doc['time'], doc['kka']);
+                            doc['name'], doc['time'], doc['energy']);
                       });
                 }
                 return Center(child: Text('No data'));
@@ -58,7 +58,7 @@ class ActivityItem extends StatelessWidget {
 
   final String activity;
   final int time;
-  final int kka;
+  final String kka;
 
   @override
   Widget build(BuildContext context) {
@@ -122,9 +122,9 @@ class ActivityItem extends StatelessWidget {
             Text(
               '$time min',
               style: TextStyle(
-                fontSize: 10,
-                fontWeight: FontWeight.w600,
-              ),
+                  fontSize: 10,
+                  fontWeight: FontWeight.w600,
+                  color: Colors.blueGrey),
             ),
             SizedBox(width: 5),
             Icon(
@@ -135,10 +135,11 @@ class ActivityItem extends StatelessWidget {
               width: 5,
             ),
             Text(
-              '$kka kka',
+              '$kka kcal',
               style: TextStyle(
                 fontSize: 10,
                 fontWeight: FontWeight.w600,
+                color: Colors.redAccent,
               ),
             ),
             SizedBox(width: 20)

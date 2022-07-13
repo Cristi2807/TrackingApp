@@ -1,44 +1,46 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
-
-// Import the firebase_core and cloud_firestore plugin
-import 'package:firebase_core/firebase_core.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import "package:flutter/material.dart";
 
-class AddUser extends StatelessWidget {
-  //final String fullName;
-  //final String company;
-  //final int age;
+class Steps extends StatefulWidget {
+  const Steps({Key? key}) : super(key: key);
 
-  //AddUser(this.fullName, this.company, this.age);
+  @override
+  State<Steps> createState() => _StepsState();
+}
+
+class _StepsState extends State<Steps> {
+  int steps = 0;
+
+  @override
+  void initState() {
+    getData();
+    super.initState();
+  }
+
+  getData() async {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    String today = DateTime.now().subtract(Duration(days:1)).day.toString() +
+        DateTime.now().subtract(Duration(days:1)).month.toString() +
+        DateTime.now().subtract(Duration(days:1)).year.toString();
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(auth.currentUser?.uid.toString())
+        .collection('activities')
+        .where('date', isEqualTo: today)
+        .get();
+
+    for (var doc in querySnapshot.docs) {
+      setState(() {
+        if (doc.get('steps') != 'Error') {
+          steps += int.parse(doc.get('steps'));
+        }
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    // Create a CollectionReference called users that references the firestore collection
-
-
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? user = auth.currentUser;
-    final uid = user?.uid;
-
-    final db= FirebaseFirestore.instance;
-    //CollectionReference users = FirebaseFirestore.instance.collection('users');
-    
-    Future<void> addUser() {
-      // Call the user's CollectionReference to add a new user
-      return db.collection('users').doc(uid.toString())
-          .set({
-        'full_name': "fullName", // John Doe
-        'company': "company", // Stokes and Sons
-        'age': true, // 42
-      });
-    }
-
-    return TextButton(
-      onPressed: addUser,
-      child: Text(
-        "Add User",
-      ),
-    );
+    return Text('$steps');
   }
 }

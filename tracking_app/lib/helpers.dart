@@ -20,3 +20,7 @@ String formatNumber(int number) {
         (Match m) => '${m[1]},',
   );
 }
+
+String padNumber(int n) {
+  return n.toString().padLeft(2, "0");
+}

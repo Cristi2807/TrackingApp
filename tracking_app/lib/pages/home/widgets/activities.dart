@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../../models/type_of_activity.dart';
+import '../../choose_activity/on_activity.dart';
 
 
 class Activities extends StatefulWidget {
@@ -75,9 +78,26 @@ class Activity extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    final db = FirebaseFirestore.instance;
     return GestureDetector(
-      onTap: () {
+      onTap: () async {
         onTap(activity.type);
+
+        await db
+            .collection('users')
+            .doc(auth.currentUser?.uid.toString())
+            .collection('unfinished')
+            .doc("1")
+            .set({
+          'name': activity.name,
+          'time_begin': DateTime.now(),
+        });
+
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => OnActivity()));
       },
       child: Container(
         height: 80,

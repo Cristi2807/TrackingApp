@@ -70,7 +70,7 @@ class Header extends StatelessWidget {
                         Map<String, dynamic> data =
                             snapshot.data!.data() as Map<String, dynamic>;
                         return Text(
-                          "${data['first_name']}",
+                          "${data['first name']}",
                           style: TextStyle(color: Colors.white, fontSize: 25),
                         );
                       }

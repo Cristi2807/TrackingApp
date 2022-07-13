@@ -53,7 +53,7 @@ class LoginPage extends StatelessWidget {
                   children: <Widget>[
                     Text("Login",
                     style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),),
-                    SizedBox(height: 20,),
+                    SizedBox(height: 20),
                     Text("Log into your account",
                     style: TextStyle(
                       fontSize: 15,
@@ -68,6 +68,7 @@ class LoginPage extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: TextField(
+                          obscureText: false,
                           controller: emailController,
                           decoration: InputDecoration(
                               labelText: "Email"
@@ -108,6 +109,7 @@ class LoginPage extends StatelessWidget {
                             emailController.text,
                             passwordController.text,
                           );
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => Wrapper()));
                         },
                         color: Color(0xff262e5b),
                         elevation: 0,

@@ -28,24 +28,20 @@ class Wrapper extends StatelessWidget {
                     db.collection('users').doc(user.uid.toString()).snapshots(),
                 builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
                   if (snapshot.hasData && snapshot.data != null) {
-                    if (!snapshot.data!['isBlocked'] &&
-                        !snapshot.data!['isDeleted']) {
-
+                    if (snapshot.data!['status'] == "aktiv") {
                       return Home();
                     }
                   }
 
                   if (snapshot.hasData &&
                       snapshot.data != null &&
-                      snapshot.data!['isBlocked']) {
+                      snapshot.data!['status'] == "gesperrt") {
                     return Blocked();
                   }
 
                   if (snapshot.hasData &&
                       snapshot.data != null &&
-                      snapshot.data!['isDeleted'] == true) {
-
-
+                      snapshot.data!['status'] == "gelöscht") {
                     return Blocked();
                   }
 
